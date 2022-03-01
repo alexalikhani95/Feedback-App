@@ -1,12 +1,13 @@
 import './App.css';
+import FeedbackItem from './components/FeedbackItem';
 import Header from './components/Header';
 
 const App = () => {
   return (
     <>
-    <Header text="Feedback UI"/>
+    <Header/>
     <div className="container">
-      My app
+      <FeedbackItem />
     </div>
     </>
   );
