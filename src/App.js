@@ -9,6 +9,7 @@ import FeedbackData from "./data/FeedbackData";
 import { v4 as uuidv4 } from "uuid";
 import AboutPage from "./components/pages/AboutPage";
 import AboutIconLink from "./components/AboutIconLink";
+import { FeedbackProvider } from "./context/FeedbackContext";
 
 const App = () => {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -27,6 +28,7 @@ const App = () => {
   };
 
   return (
+    <FeedbackProvider>
     <BrowserRouter>
       <Header />
       <div className="container">
@@ -46,6 +48,7 @@ const App = () => {
         <AboutIconLink />
       </div>
     </BrowserRouter>
+    </FeedbackProvider>
   );
 };
 
