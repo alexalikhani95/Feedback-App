@@ -9,6 +9,10 @@ import FeedbackData from "./data/FeedbackData";
 const App = () => {
   const [feedback, setFeedback] = useState(FeedbackData);
 
+  const addFeedback = (newFeedback) => {
+    console.log(newFeedback)
+  }
+
   const deleteFeedback = (id) => {
     if(window.confirm('Are you sure you want to delete?')) {
       //return an array of the feedback items. minus the one we are deleting
@@ -20,7 +24,7 @@ const App = () => {
     <>
       <Header />
       <div className="container">
-        <FeedbackForm />
+        <FeedbackForm handleAdd={addFeedback}/>
         <FeedbackStats feedback={feedback}/>
         <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
       </div>
