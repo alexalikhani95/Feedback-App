@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import FeedbackData from "./data/FeedbackData";
 import { v4 as uuidv4 } from "uuid";
 import AboutPage from "./components/pages/AboutPage";
+import AboutIconLink from "./components/AboutIconLink";
 
 const App = () => {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -42,6 +43,7 @@ const App = () => {
           ></Route>
           <Route path="/about" element={<AboutPage />} />
         </Routes>
+        <AboutIconLink />
       </div>
     </BrowserRouter>
   );
