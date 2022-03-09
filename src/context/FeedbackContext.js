@@ -6,11 +6,6 @@ export const FeedbackProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [feedback, setFeedback] = useState([]);
 
-  // Update feedback item
-  const updateFeedback = (id, updatedItem) => {
-    setFeedback(feedback.map((item) => (item.id === id ? { ...item, ...updatedItem } : item)));
-  };
-
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
     edit: false,
@@ -31,8 +26,9 @@ export const FeedbackProvider = ({ children }) => {
   }
 
   // delete feedback
-  const deleteFeedback = (id) => {
+  const deleteFeedback = async (id) => {
     if (window.confirm("Are you sure you want to delete?")) {
+      await fetch(`/feedback/${id}`, { method: 'DELETE' })
       //return an array of the feedback items. minus the one we are deleting
       setFeedback(feedback.filter((item) => item.id !== id));
     }
@@ -51,6 +47,21 @@ export const FeedbackProvider = ({ children }) => {
     const data = await response.json()
     setFeedback([data, ...feedback]); // feedback to an array with all current feedback items and also the new one
   };
+
+    // Update feedback item
+    const updateFeedback = async (id, updatedItem) => {
+      const response = await fetch(`/feedback/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(updatedItem)
+      })
+
+      const data = await response.json()
+
+      setFeedback(feedback.map((item) => (item.id === id ? { ...item, ...data } : item)));
+    };
 
   // Set item to be updated
   const editFeedback = (item) => {
